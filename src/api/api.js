@@ -6,8 +6,8 @@ const api=axios.create({
     timeout: 5000, // Optional: Set a timeout in milliseconds
     headers: {
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${localStorage.getItem('token')}`, // Optional: Add auth token dynamically
     },
+    withCredentials:true
 })
 
 export default api

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import api from "../api/api.js";
+import { useNavigate } from "react-router-dom";
 
 
 function handleInputErrors(inputs){
@@ -15,6 +16,7 @@ function handleInputErrors(inputs){
 }
 const useLogin=()=>{
 
+    const navigate=useNavigate()
     const [loading,setLoading]=useState(false)
     const {setAuthUser}=useAuthContext()
     
@@ -29,6 +31,9 @@ const useLogin=()=>{
             const user=res.data
             console.log(user)
             localStorage.setItem("profile-user",JSON.stringify(user.data))
+            if(localStorage.getItem("profile-user")){
+                navigate("/")
+            }
             setAuthUser(user.data)
         }
         catch(error){

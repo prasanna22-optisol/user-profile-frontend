@@ -1,21 +1,25 @@
 import React,{useState} from "react";
+import useSignup from "../hooks/useSignup";
 const Signup = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
   const [designation, setDesignation] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  function handleSubmit(event) {
+  const {loading,handleSignup}=useSignup()
+
+  async function handleSubmit(event) {
     event.preventDefault()
     console.log(email)
     console.log(password)
     console.log(fullName)
-    console.log(phoneNumber)
+    console.log(mobileNumber)
     console.log(designation)
     console.log(confirmPassword)
+    await handleSignup({email,fullName,password,confirmPassword,mobileNumber,designation})
   }
 
   return (
@@ -69,8 +73,8 @@ const Signup = () => {
             type="text"
             id="phoneNumber"
             className="bg-gray-200 border-2 border-red-300 rounded-lg"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            value={mobileNumber}
+            onChange={(e) => setMobileNumber(e.target.value)}
           />
         </div>
         <div className="text-xl flex flex-col gap-1">
@@ -83,11 +87,19 @@ const Signup = () => {
             onChange={(e) => setDesignation(e.target.value)}
           />
         </div>
+        <div className="text-sm flex flex-row align-center justify-center">
+          <p>Already have an account ? <a href="/login" className="text-green-600 cursor-pointer">Login</a> here </p>
+        </div>
         <button
           type="submit"
           className="bg-fuchsia-500 text-white cursor-pointer px-5 py-3 rounded-md"
+          disabled={loading}
         >
-          SignUp
+          {loading ? (
+            <span className={"loading loading-spinner"}></span>
+          ) : (
+            "Signup"
+          )}
         </button>
       </form>
     </div>
