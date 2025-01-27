@@ -47,9 +47,9 @@ const Login = () => {
           <p><a href="/forgot-password" className="text-blue-600 cursor-pointer">Forgot Password</a>  </p>
         </div>
 
-        <div className="text-sm flex flex-row align-center justify-center">
+        {/* <div className="text-sm flex flex-row align-center justify-center">
           <p><a href="/reset" className="text-blue-600 cursor-pointer">Reset Password</a>  </p>
-        </div>
+        </div> */}
         <button
           type="submit"
           className="bg-fuchsia-500 text-white cursor-pointer px-5 py-3 rounded-md"
