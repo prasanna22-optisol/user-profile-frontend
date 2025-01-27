@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import api from "../api/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
@@ -8,9 +8,9 @@ const ResetPassword = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const currentUser = JSON.parse(localStorage.getItem("profile-user"));
-  console.log("Current User:", currentUser);
-  const userId = currentUser._id;
+  
+
+  const {token} = useParams()
 
   const navigate=useNavigate()
 
@@ -20,22 +20,24 @@ const ResetPassword = () => {
     event.preventDefault()
     setLoading(true)
 
+    console.log("Token: " + token)
+
     if (newPassword !== confirmPassword) {
       setMessage("Passwords do not match");
       setLoading(false);
-      navigate("/")
       return;
     }
 
     try{
 
       const response=await api.patch("/users/reset-password",{
-        userId,
+        token,
         newPassword,
         confirmPassword
       })
     
       console.log("Password reset successfully :",response.data)
+      navigate("/login")
       setMessage(response.data.message)
 
     }

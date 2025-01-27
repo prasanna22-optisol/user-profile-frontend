@@ -17,9 +17,17 @@ const ForgotPassword = () => {
       const response=await api.post("/users/forgot-password",{
           email
       })
-      navigate("/reset")
-      console.log(response.data)
-      setMessage(response.data.message)
+      const token=response.data.token
+      if(token){
+        navigate(`/reset/${token}`)
+        console.log(response.data)
+         setMessage(response.data.message)
+      }
+      else{
+        setMessage("Reset Token Not Found.")
+      }
+      
+      
     }
     catch(error){
       console.error(error)
