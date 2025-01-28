@@ -12,7 +12,6 @@ const ForgotPassword = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true)
-
     try{
       const response=await api.post("/users/forgot-password",{
           email
