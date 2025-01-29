@@ -81,6 +81,12 @@ const UserDetails = () => {
         Update Profile
       </button>
       <button
+        className="mt-4 px-4 py-2 ml-10 bg-amber-700 text-white font-semibold rounded-md hover:bg-blue-600"
+        onClick={()=>navigate("/all")}
+      >
+        All Users
+      </button>
+      <button
         className="mt-4 px-4 py-2 ml-10 bg-red-500 text-white font-semibold rounded-md hover:bg-red-600"
         onClick={
           () => {
